@@ -1,0 +1,15 @@
+1  C
+2  C
+3  B
+4  EDC
+5  A
+6  B
+7  AC
+8  CE
+9  BCE
+10 ACD
+11 ACE
+12 ACD
+13 BE
+14 
+15 BE
