@@ -1,0 +1,211 @@
+ ┌────────────────────────────────────────────────────────────────────────────────────────────────────┐
+ │                                                                                                    │
+ │ main                                                                                               │
+ │                                                                                                    │
+ │ lis le dictionnaire fournit en entrée, l'affiche puis cherche et affiche chaque anagramme fournit. │
+ │                                                                                                    │
+ │ Entrée : rien                                                                                      │
+ │ Sortie : rien                                                                                      │
+ ├────────────────────────────────────────────────────────────────────────────────────────────────────┤
+ │ lecture(dictionnaire, Vrai) // le vrai indique qu'il faut quitter en cas d'erreur.                 │
+ │ displayDict(dictionnaire)                                                                          │
+ │ tant que vrai                                                                                      │
+ │   anaspace <- {}                                                                                   │
+ │   anagrammeDict <- {}                                                                              │
+ │   lecture(anagrammeDict, Faux)                                                                     │
+ │   anagramme <- concatenate(anagrammeDict)                                                          │
+ │   trimmedDict <- trimDict(dictionnaire, anagramme) // enlève les mots qui ne font pas d'anagramme  │
+ │   computeMultiverseFromDict(trimmedDict, anaSpace, anagramme) // calcul les combinaison possible   │
+ │   Anagram(anaSpace, anagramme) // trouve la ou les anagrammes dans les combinaison et les affiche  │
+ │                                                                                                    │
+ └────────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+ ┌────────────────────────────────────────────────────────────────────────────────────────────────────┐
+ │                                                                                                    │
+ │ Lecture                                                                                            │
+ │                                                                                                    │
+ │ Lis les donner passer au programmer et remplis un dictionnaire passé par référence                 │
+ │ Le dictionnaire est trié au fur et a mesure.                                                       │
+ │                                                                                                    │
+ │ Entrée : Flag indiquant si il faut quitter apres une erreur                                        │
+ │ Entrée modifié : Dictionnaire (Liste de structure)                                                 │
+ │ Sortie : Rien                                                                                      │
+ ├────────────────────────────────────────────────────────────────────────────────────────────────────┤
+ │ entree <- compute (entree standard)                                                                │
+ │ tant que entree est différente de '*' ou '.'                                                       │
+ │   index <- findPos(entree) // trouve la position à laquelle un mots doit etre rangé dans le dico   │
+ │   tester(entree, index) // check que entree est en majuscule + pas deja dans le dico               │
+ │   status <- tester(entree)                                                                         │
+ │   Si status = OK                                                                                   │
+ │     insert(index, entree, dictionnaire) // dictionnaire est passé par référence et modifié         │
+ │   Sinon                                                                                            │
+ │     manageException(status,exitIfError)                                                            │
+ │   entree <- compute (entreerstandard)                                                              │
+ │ Si entree = '*'                                                                                    │
+ │    quitter                                                                                         │
+ │                                                                                                    │
+ └────────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+ ┌────────────────────────────────────────────────────────────────────────────────────────────────────┐
+ │                                                                                                    │
+ │ findPos                                                                                            │
+ │                                                                                                    │
+ │ Trouve la position a laquelle un élément doit etre rangé dans un dictionnaire.                     │
+ │ Utiliser la fonction compare pour comparer la taille, la diversité de lettre et le alpha.          │
+ │ vérifie manuellement l'ordre alphabétique si tout le reste est identique.                          │
+ │                                                                                                    │
+ │ Entrée : Dictionnaire, element                                                                     │
+ │ Sortie : index                                                                                     │
+ ├────────────────────────────────────────────────────────────────────────────────────────────────────┤
+ │ continuerLaRecherche <- true                                                                       │
+ │ Tant que continuerLaRecherche                                                                      │
+ │   Si taille(dictionnaire) <= index                                                                 │
+ │     retourner index // l'index est a la fin du dictionnaire. ne peut aller plus loin.              │
+ │   resultatComparaison <- compare(Dictionnaire(i), element)                                         │
+ │   Si resultatComparaison = égal                                                                    │
+ │     Si entree.mot > Dictionnaire(i).mot //vérifie l'ordre alphabétique                             │
+ │       i <- i + 1                                                                                   │
+ │     Sinon                                                                                          │
+ │       continuerLaRecherche <- faux                                                                 │
+ │   Sinon Si resultatComparaison = inférieur                                                         │
+ │     i <- i + 1                                                                                     │
+ │   Sinon Si resultatComparaison = supérieur                                                         │
+ │     continuerLaRecherche <- faux                                                                   │
+ │ Sortir i                                                                                           │
+ │                                                                                                    │
+ └────────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+   ┌──────────────────────────────────────────────────────────────────────┐    ┌──────────────────────────────────────────────────────────────────┐
+   │                                                                      │    │                                                                  │
+   │ insert                                                               │    │ compare                                                          │
+   │                                                                      │    │                                                                  │
+   │ inserer un élément dans le dictionnaire a la position donné.         │    │ compare deux mots selon leurs nbT nbD et alpha hiéerarchiquement │
+   │                                                                      │    │                                                                  │
+   │ Entrée : index, element                                              │    │ Entrée : motA, motB                                              │
+   │ Entrée modifié : Dictionnaire                                        │    │ Sortie : inférieur, égal ou supérieur                            │
+   │ Sortie : rien                                                        │    ├──────────────────────────────────────────────────────────────────┤
+   ├──────────────────────────────────────────────────────────────────────┤    │ Si motA.nbT > motB.nbT                                           │
+   │ buffer <- elementToInsert                                            │    │   retourner supérieur                                            │
+   │ Si positionInsertion < taille(dictionnaire)                          │    │ Sinon Si motA.nbT < motB.nbT                                     │
+   │   buffer <- dictionnaire(positionInsertion)                          │    │   retourner inférieur                                            │
+   │   dictionnaire(i) <- elementToInsert                                 │    │ Sinon Si motA.nbT = motB.nbT                                     │
+   │   Pour i allant de positionInsertion +1 à la taille du dictionnaire  │    │   Si motA.nbD > motB.nbD                                         │
+   │     bufferLocal <- dictionnaire(i)                                   │    │     retourner supérieur                                          │
+   │     dictionnaire(i) <- buffer                                        │    │   Sinon Si motA.nbD < motB.nbD                                   │
+   │     buffer <- bufferLocal                                            │    │     retourner inférieur                                          │
+   │ dictionnaire.push_back(buffer)                                       │    │   Sinon Si motA.nbD = motB.nbD                                   │
+   │                                                                      │    │     Si motA.alpha > motB.alpha                                   │
+   └──────────────────────────────────────────────────────────────────────┘    │       retourner supérieur                                        │
+                                                                               │     Sinon Si motA.alpha < motB.alpha                             │
+                                                                               │       retourner inférieur                                        │
+                                                                               │     Sinon Si motA.alpha = motB.alpha                             │
+                                                                               │       retouner égal                                              │
+                                                                               │                                                                  │
+                                                                               └──────────────────────────────────────────────────────────────────┘
+
+
+                 ┌──────────────────────────────────────────────────────────────────────────────────────────────────────┐
+                 │                                                                                                      │
+                 │ Anagram                                                                                              │
+                 │                                                                                                      │
+                 │ itère sur chaque combinaison de mots du dictionnaire en vérifiant que le alpha soit égal.            │
+                 │ Si il est égal, le set des permutations des mots du dictionnaire qui compose l'anagramme             │
+                 │ est affiché.                                                                                         │
+                 │                                                                                                      │
+                 └──────────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+                 ┌──────────────────────────────────────────────────────────────────────────────────────────────────────┐
+                 │                                                                                                      │
+                 │ ComputeMultiverseFromDict                                                                            │
+                 │                                                                                                      │
+                 │ Retourne un dictionnaire de toutes les combinaison de mots du dictionnaire qui on le meme nombre     │
+                 │ de lettre que l'anagramme. utile une fonction qui calcule toutes les combinaison d'un set d'élément  │
+                 │                                                                                                      │
+                 └──────────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+                 ┌──────────────────────────────────────────────────────────────────────────────────────────────────────┐
+                 │                                                                                                      │
+                 │ trimDict                                                                                             │
+                 │                                                                                                      │
+                 │ retourne un dictionnaire dont les mots contenants des lettres qui ne sont pas dans l'anagramme       │
+                 │ ont été enlever.                                                                                     │
+                 │                                                                                                      │
+                 └──────────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+                 ┌──────────────────────────────────────────────────────────────────────────────────────────────────────┐
+                 │                                                                                                      │
+                 │ concatenate                                                                                          │
+                 │                                                                                                      │
+                 │ retourne une structuere de dictionnaire ou les mots de l'anagramme on été concaténé.                 │
+                 │                                                                                                      │
+                 └──────────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+                 ┌──────────────────────────────────────────────────────────────────────────────────────────────────────┐
+                 │                                                                                                      │
+                 │ computeAlpha                                                                                         │
+                 │                                                                                                      │
+                 │ retourne  une string dont les charactère sont trié par ordre alphabétique                            │
+                 │ décompose la string en un vecteur de lettre et la trie via une fonction qui trie des liste de string │
+                 │                                                                                                      │
+                 └──────────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+                 ┌──────────────────────────────────────────────────────────────────────────────────────────────────────┐
+                 │                                                                                                      │
+                 │ computeNbD                                                                                           │
+                 │                                                                                                      │
+                 │ retourner le nombre de char différent dans une string trie. compte le nombre de changement d'état    │
+                 │                                                                                                      │
+                 └──────────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+                 ┌──────────────────────────────────────────────────────────────────────────────────────────────────────┐
+                 │                                                                                                      │
+                 │ computeNbT                                                                                           │
+                 │                                                                                                      │
+                 │ retourne  la taille d'une string donné                                                               │
+                 │                                                                                                      │
+                 └──────────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+                 ┌──────────────────────────────────────────────────────────────────────────────────────────────────────┐
+                 │                                                                                                      │
+                 │ compute                                                                                              │
+                 │                                                                                                      │
+                 │ calcul les parametre d'une string donné et retourne une structure dictionnaire                       │
+                 │ plus précisément, calcul le nbT, nbD, et alpha d'un mot via des fonction spécifique                  │
+                 │                                                                                                      │
+                 └──────────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+                 ┌──────────────────────────────────────────────────────────────────────────────────────────────────────┐
+                 │                                                                                                      │
+                 │ tester                                                                                               │
+                 │                                                                                                      │
+                 │ teste que l'entrée soit en majuscule et pas deja dans le dictionnaire                                │
+                 │ utilise une fonction qui retourne vrai si le mot est entièrement enen majuscule                      │
+                 │ utilise une seconde fonciton qui retourne vrai si le mot n'est pas deja dans le dico                 │
+                 │                                                                                                      │
+                 └──────────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+                 ┌──────────────────────────────────────────────────────────────────────────────────────────────────────┐
+                 │                                                                                                      │
+                 │ isCaps                                                                                               │
+                 │                                                                                                      │
+                 │ test que chaque lettre d'un mot se trouve bien etre les valeurs de A et Z dans la table ASCII        │
+                 │                                                                                                      │
+                 └──────────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+                 ┌──────────────────────────────────────────────────────────────────────────────────────────────────────┐
+                 │                                                                                                      │
+                 │ notInDict                                                                                            │
+                 │                                                                                                      │
+                 │ appelle findPos pour connaitre l'index auquelle aurais été rangé le potentiel                        │
+                 │ doublon du mot. vérifie que le mots présent a l'index trouvé est différent du                        │
+                 │ mot a tester                                                                                         │
+                 │                                                                                                      │
+                 └──────────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+                 ┌──────────────────────────────────────────────────────────────────────────────────────────────────────┐
+                 │                                                                                                      │
+                 │ manageException                                                                                      │
+                 │                                                                                                      │
+                 │ Affiche les différents message d'erreur selon le code de status qui lui est donné.                   │
+                 │                                                                                                      │
+                 └──────────────────────────────────────────────────────────────────────────────────────────────────────┘

@@ -1,0 +1,40 @@
+A Résultat de la phase d’analyse
+- Décrire la structure générale du programme (1/2 page taille 11)
+- en faisant ressortir la mise en oeuvre des principes d’abstraction et de ré-utilisation dans votre projet.
+- Concentrez-vous sur la décomposition du tri hiérarchique
+
+- Pseudocode de votre algorithme effectuant le tri hiérarchique du dictionnaire 
+
+- Quel est l’ordre de complexité de l’algorithme de détection d’anagramme n fonction de nbM, le nombre total de mots du dictionnaire 
+
+A partir des temps d’exécution « user » (série 6) sur les fichiers publics dont le nom contient 
+perf1.txt, perf2.txt, perf3.txt,  fournir le graphique de ces temps (abscisse linéaire, ordonnée 
+logarithmique) en fonction de nbM. Est-ce cohérent avec la réponse précédente
+
+(2pt) rapport : soyez concis (Fig 4) 
+(4pt) Lisibilité, structuration du code et conventions de programmation du cours 
+(3pt) votre programme fonctionne correctement avec les fichiers publics 
+(3pt) votre programme fonctionne correctement avec les fichiers non-publics
+
+1) lire le dico avec un while pas de "." (traiter les exception si besoin) (chaque entrée est inserer a la bonne place donc il est trié tout seul)
+2) afficher le dico
+
+WHILE not "*" :
+3) lire l'anagrames avec la meme fonction que le dico (un flag pour changer legerement le behavior en cas d'erreur)
+4) calculer les parametre de la string en entrée (nbT, nbD, alpha)
+5) trimmer le dictionnaire (enlever les mots qui ont des lettres qui sont pas dans l'anagram)
+6) calculer l'espace des anagram possible engendré par le dico (2^n combinaison, on ne retiens que  celle qui ont exactement le meme nombre de lettre que l'anagramme)
+7) on cherche l'anagram dans l'espace des possible
+8) pour chaque anagram trouver afficher les permutation possibles des mots qui le compose (n!)
+
+
+
+
+9	2.93
+10	16.995   5.66
+11	122.7    7.21
+14	118.749
+
+9   0.049708
+10  0.579513
+11  6.17505

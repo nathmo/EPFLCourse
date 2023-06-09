@@ -1,0 +1,4 @@
+.
+ACTE	CARTE	CARIE	ACIER
+.
+*
