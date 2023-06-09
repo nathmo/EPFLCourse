@@ -1,0 +1,5 @@
+
+AVRASM ver. 2.2.8  C:\Users\Nathann\OneDrive\ClawdDrive\Documents\EPFL\MTBA4\MicroControlleur\TP3\AssemblerApplication1\AssemblerApplication1\main.asm Thu Mar 16 15:16:53 2023
+
+[builtin](2): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\avrasm\inc\m1284Pdef.inc'
+C:\Users\Nathann\OneDrive\ClawdDrive\Documents\EPFL\MTBA4\MicroControlleur\TP3\AssemblerApplication1\AssemblerApplication1\main.asm(10): error: Cannot find include file: definitions.asm

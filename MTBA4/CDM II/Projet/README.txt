@@ -1,0 +1,2 @@
+this folder contains the CAD (3D file) of our force probe and the report + presentation + the python script to compute the properties of the mechanism.
+everything is also hosted on github https://github.com/nathmo/FlexProbeOptimisation

@@ -1,0 +1,29 @@
+Q1.VB0 3.4 V Q1.VE0 2.32 V
+Q1.VC0 7.8 V Q1.CE0 5.48 V
+Q1.IC0 1.05 mA Q1.IB0 0.000 mA 
+Q1.IE0 1.05 mA
+
+ICsat = (Vcc-Uj)/(Rc+Re1//Re2)
+ICsat = (15-0.6)/(6800+2200//560)=1.9872 mA
+Uout min = Uj+(Vcc-Uj)/(Rc+Re1//Re2)*Re1//Re2=1.4870 V
+Uout max = Vcc=15V V
+Vomax = Uoutmax- Uoutmin= 13.513 V
+
+
+2b.gm0=gm2/2=Ic1/(2*0.26mV)=20.192 mA/V
+2b.gbe0=Ic1/(Ut*2*beta)=67.30 uA/V
+2b.Av=182
+2b.Fc=242.7 kHz
+
+
+
+3.bA0=109 dB
+3.bGBW=136.4Mhz
+3.bpoleDominant=543Hz
+3.bpoleNonDominant=18.6MHz
+
+3.b : 
+Vo/Vid et Vo/Vo3
+
+
+
