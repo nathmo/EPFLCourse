@@ -30,6 +30,6 @@ you can create a pull request with new file to add them to the collections.
 
 the page are in markdown and thus are really easy to edit.
  
-[see the raw file for this page](https://github.com/nathmo/EPFLCourse/main)
+[see the raw file for this page](https://github.com/nathmo/EPFLCourse/blob/main/index.md)
 
 [Markdown cheat sheet](https://www.markdownguide.org/cheat-sheet/)
